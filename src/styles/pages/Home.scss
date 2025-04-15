@@ -1,0 +1,30 @@
+.home-container {
+  padding: 20px;
+  background-color: #f5faff; // 부드러운 푸른 배경색
+
+  h2 {
+    color: #005f77; // 제목 색상 (어두운 푸른색)
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+
+  a {
+    color: #007bff; // 푸른 링크 색상
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      color: #005f77; // 호버시 어두운 푸른색
+    }
+  }
+}

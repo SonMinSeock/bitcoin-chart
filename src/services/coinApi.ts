@@ -1,24 +1,27 @@
-const BASE_URL = "https://api.coinpaprika.com/v1/tickers";
+// services/coinApi.ts
 
-export const getBitcoinPrice = async (currency: "KRW" | "USD") => {
-  try {
-    const url = `${BASE_URL}?quotes=${currency}`;
-    const res = await fetch(url);
+export interface CoinQuote {
+  price: number;
+  volume_24h: number;
+  market_cap: number;
+  percent_change_1h: number;
+  percent_change_6h: number;
+  percent_change_12h: number;
+  percent_change_24h: number;
+}
 
-    if (!res.ok) {
-      throw new Error(`HTTP error: ${res.status} ${res.statusText}`);
-    }
+export interface CoinData {
+  id: string;
+  name: string;
+  symbol: string;
+  quotes: {
+    KRW: CoinQuote;
+    USD: CoinQuote;
+  };
+}
 
-    const data = await res.json();
-
-    const priceInfo = data[0]?.quotes?.[currency];
-    if (!priceInfo) {
-      throw new Error("Price information is missing in the response.");
-    }
-
-    return priceInfo;
-  } catch (error) {
-    console.error("Failed to fetch Bitcoin price:", error);
-    throw error; // 에러를 다시 throw해서 상위에서 처리할 수 있게
-  }
+export const fetchBitcoinPrice = async (currency: "KRW" | "USD"): Promise<CoinData[]> => {
+  const response = await fetch(`https://api.coinpaprika.com/v1/tickers?quotes=${currency}`);
+  const data = await response.json();
+  return data;
 };

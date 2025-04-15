@@ -1,1 +1,33 @@
+// 기본 색상
+$primary-color: #007bff; // 푸른 색
+$secondary-color: #0056b3; // 짙은 푸른색
+$background-color: #f0f8ff; // 밝은 파랑 배경
+$text-color: #333; // 기본 텍스트 색상
+$button-hover-color: #0056b3; // 버튼 호버 색상
+
 @import "./base/reset";
+@import "./pages/Home.scss";
+@import "./pages/CoinDetail.scss";
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+}
+
+// 버튼
+button {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+}

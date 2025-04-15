@@ -1,0 +1,35 @@
+.coin-detail-container {
+  padding: 30px;
+  background-color: #f0f8ff; // 밝은 푸른 배경색
+
+  h2 {
+    color: #005f77;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  .currency-buttons {
+    margin-bottom: 20px;
+
+    button {
+      background-color: #d0e6f8; // 비활성 기본 색상 (연한 파랑)
+      color: #005f77;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+
+      &.active {
+        background-color: #007bff; // 활성화된 버튼 (진한 파랑)
+        color: white;
+      }
+
+      &:hover {
+        background-color: #005f77;
+        color: white;
+      }
+    }
+  }
+}

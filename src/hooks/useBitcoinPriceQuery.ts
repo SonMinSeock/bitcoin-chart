@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBitcoinPrice } from "../services/coinApi";
+import { CoinData, fetchBitcoinPrice } from "../services/coinApi";
 
 export const useBitcoinPriceQuery = (currency: "KRW" | "USD") => {
-  return useQuery({
+  return useQuery<CoinData[], Error>({
     queryKey: ["bitcoinPrice", currency],
-    queryFn: () => getBitcoinPrice(currency),
-    staleTime: 1000 * 60, // 1분 동안 fresh
+    queryFn: () => fetchBitcoinPrice(currency),
+    staleTime: 60 * 1000, // 1분
   });
 };

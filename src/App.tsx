@@ -1,13 +1,18 @@
+// App.tsx
 import React from "react";
-import Chart from "./components/Chart";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import CoinDetail from "./pages/CoinDetail";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <Chart currency="KRW" />
-      <Chart currency="USD" />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/coin/:id" element={<CoinDetail />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
