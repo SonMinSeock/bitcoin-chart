@@ -1,26 +1,20 @@
-// components/Chart.tsx
-import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { useBitcoinPriceQuery } from "../hooks/useBitcoinPriceQuery";
+import { CoinQuote } from "../services/coinApi";
 
 interface ChartProps {
+  coinName: string;
+  coinQuote: CoinQuote;
   currency: "KRW" | "USD";
 }
 
-const Chart = ({ currency }: ChartProps) => {
-  const { data, isLoading, isError, error } = useBitcoinPriceQuery(currency);
-
-  if (isLoading) return <p>로딩 중...</p>;
-  if (isError) return <p>에러 발생: {(error as Error).message}</p>;
-
-  // price에 안전하게 접근
-  const currentPrice = data?.[0]?.quotes[currency]?.price ?? 0;
+const Chart = ({ coinName, coinQuote, currency }: ChartProps) => {
+  const currentPrice = coinQuote.price;
 
   // 시간 흐름에 따른 더미 데이터 (실제로는 API percent_change_xx로 만들 수도 있음)
   const chartData = [
-    currentPrice * (1 + (data?.[0]?.quotes[currency]?.percent_change_12h ?? 0) / 100),
-    currentPrice * (1 + (data?.[0]?.quotes[currency]?.percent_change_6h ?? 0) / 100),
-    currentPrice * (1 + (data?.[0]?.quotes[currency]?.percent_change_1h ?? 0) / 100),
+    currentPrice * (1 + (coinQuote.percent_change_12h ?? 0) / 100),
+    currentPrice * (1 + (coinQuote.percent_change_6h ?? 0) / 100),
+    currentPrice * (1 + (coinQuote.percent_change_1h ?? 0) / 100),
     currentPrice,
   ];
 
@@ -28,7 +22,7 @@ const Chart = ({ currency }: ChartProps) => {
 
   return (
     <div>
-      <h3>{currency} 시세 차트</h3>
+      <h3>{coinName} 시세 차트</h3>
       <ReactApexChart
         type="line"
         series={[
