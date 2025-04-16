@@ -1,5 +1,5 @@
 import ReactApexChart from "react-apexcharts";
-import { CoinQuote } from "../services/coinApi";
+import { CoinQuote } from "../../services/coinApi";
 
 interface ChartProps {
   coinName: string;

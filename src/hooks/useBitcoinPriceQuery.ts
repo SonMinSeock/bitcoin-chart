@@ -1,3 +1,4 @@
+// 같은 도메인(비트코인 가격)에 대한 API 요청이니까, 관련 훅을 한 파일에서 관리하면 유지보수나 관리하기 편리하다.
 import { useQuery } from "@tanstack/react-query";
 import { CoinData, fetchBitcoinPrice, fetchBitcoinPriceDetail } from "../services/coinApi";
 
