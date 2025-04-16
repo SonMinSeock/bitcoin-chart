@@ -2,21 +2,25 @@ import ReactApexChart from "react-apexcharts";
 import { CoinQuote } from "../../services/coinApi";
 
 interface ChartProps {
+  chartType: "line" | "bar" | "area" | undefined;
+  closeChart: () => void;
   coinName: string;
   coinQuote: CoinQuote;
   currency: "KRW" | "USD";
 }
 
-const Chart = ({ coinName, coinQuote, currency }: ChartProps) => {
+const Chart = ({ chartType, closeChart, coinName, coinQuote, currency }: ChartProps) => {
   const currentPrice = coinQuote.price;
 
   // 시간 흐름에 따른 더미 데이터 (실제로는 API percent_change_xx로 만들 수도 있음)
-  const chartData = [
-    currentPrice * (1 + (coinQuote.percent_change_12h ?? 0) / 100),
-    currentPrice * (1 + (coinQuote.percent_change_6h ?? 0) / 100),
-    currentPrice * (1 + (coinQuote.percent_change_1h ?? 0) / 100),
-    currentPrice,
-  ];
+  const getPrice = () => {
+    return [
+      currentPrice * (1 + (coinQuote.percent_change_12h ?? 0) / 100),
+      currentPrice * (1 + (coinQuote.percent_change_6h ?? 0) / 100),
+      currentPrice * (1 + (coinQuote.percent_change_1h ?? 0) / 100),
+      currentPrice,
+    ];
+  };
 
   const categories = ["12시간 전", "6시간 전", "1시간 전", "지금"];
 
@@ -24,11 +28,11 @@ const Chart = ({ coinName, coinQuote, currency }: ChartProps) => {
     <div>
       <h3>{coinName} 시세 차트</h3>
       <ReactApexChart
-        type="line"
+        type={chartType}
         series={[
           {
             name: "Price",
-            data: chartData,
+            data: getPrice(),
           },
         ]}
         options={{
@@ -64,6 +68,7 @@ const Chart = ({ coinName, coinQuote, currency }: ChartProps) => {
           },
         }}
       />
+      <button onClick={closeChart}>차트 닫기</button>
     </div>
   );
 };

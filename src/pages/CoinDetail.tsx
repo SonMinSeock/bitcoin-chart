@@ -6,7 +6,7 @@ import Chart from "../components/Chart/Chart";
 const CoinDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [currency, setCurrency] = useState<"KRW" | "USD">("KRW");
-
+  const [chartType, setChartType] = useState<"line" | "bar" | "area" | undefined>();
   const { data, isLoading, isError, error } = useBitcoinPriceDetailQuery(currency, id ?? "");
 
   if (isLoading) return <p>로딩 중...</p>;
@@ -16,6 +16,14 @@ const CoinDetail = () => {
 
   // price에 안전하게 접근
   const price = data?.quotes[currency]?.price ?? 0;
+
+  // 차트 선택 핸들러
+  const handleSelectChartType = (type: "line" | "bar" | "area" | undefined) => {
+    setChartType(type);
+  };
+
+  // 차트 닫기 핸들러
+  const handleCloseChart = () => setChartType(undefined);
 
   return (
     <div className="coin-detail-container">
@@ -37,7 +45,27 @@ const CoinDetail = () => {
         {currency} 시세: {price.toLocaleString()} {currency}
       </p>
       <div className="chart-container">
-        <Chart coinName={data.name} coinQuote={data.quotes[currency]} currency={currency} />
+        <div>
+          <button onClick={() => handleSelectChartType("line")} className={chartType === "line" ? "active" : ""}>
+            라인 차트
+          </button>
+          <button onClick={() => handleSelectChartType("bar")} className={chartType === "bar" ? "active" : ""}>
+            막대 차트
+          </button>
+          <button onClick={() => handleSelectChartType("area")} className={chartType === "area" ? "active" : ""}>
+            영역 차트
+          </button>
+        </div>
+        {chartType && (
+          <Chart
+            key={chartType}
+            chartType={chartType}
+            closeChart={handleCloseChart}
+            coinName={data.name}
+            coinQuote={data.quotes[currency]}
+            currency={currency}
+          />
+        )}
       </div>
     </div>
   );
