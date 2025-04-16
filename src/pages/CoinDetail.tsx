@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useBitcoinPriceDetailQuery } from "../hooks/useBitcoinPriceQuery";
-import Chart from "../components/Chart/Chart";
-import LoadingSpinner from "../components/Spinner/LoadingSpinner";
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useBitcoinPriceDetailQuery } from '../hooks/useBitcoinPriceQuery';
+import Chart from '../components/Chart/Chart';
+import LoadingSpinner from '../components/Spinner/LoadingSpinner';
 
 const CoinDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [currency, setCurrency] = useState<"KRW" | "USD">("KRW");
-  const [chartType, setChartType] = useState<"line" | "bar" | "area" | undefined>();
-  const { data, isLoading, isError, error, isFetched } = useBitcoinPriceDetailQuery(currency, id ?? "");
+  const [currency, setCurrency] = useState<'KRW' | 'USD'>('KRW');
+  const [chartType, setChartType] = useState<
+    'line' | 'bar' | 'area' | undefined
+  >();
+  const { data, isLoading, isError, error, isFetched } =
+    useBitcoinPriceDetailQuery(currency, id ?? '');
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러 발생: {(error as Error).message}</p>;
@@ -18,7 +21,7 @@ const CoinDetail = () => {
   const price = data?.quotes[currency]?.price ?? 0;
 
   // 차트 선택 핸들러
-  const handleSelectChartType = (type: "line" | "bar" | "area" | undefined) => {
+  const handleSelectChartType = (type: 'line' | 'bar' | 'area' | undefined) => {
     setChartType(type);
   };
 
@@ -26,34 +29,49 @@ const CoinDetail = () => {
   const handleCloseChart = () => setChartType(undefined);
 
   return (
-    <div className="coin-detail-container">
-      <Link to="/" className="back-home">
+    <div className='coin-detail-container'>
+      <Link to='/' className='back-home'>
         ← 홈으로
       </Link>
 
       <h2>
         {data.name} ({data.symbol}) 상세 정보
       </h2>
-      <div className="currency-buttons">
-        <button className={currency === "KRW" ? "active" : ""} onClick={() => setCurrency("KRW")}>
+      <div className='currency-buttons'>
+        <button
+          className={currency === 'KRW' ? 'active' : ''}
+          onClick={() => setCurrency('KRW')}
+        >
           원화
         </button>
-        <button className={currency === "USD" ? "active" : ""} onClick={() => setCurrency("USD")}>
+        <button
+          className={currency === 'USD' ? 'active' : ''}
+          onClick={() => setCurrency('USD')}
+        >
           달러
         </button>
       </div>
       <p>
         {currency} 시세: {price.toLocaleString()} {currency}
       </p>
-      <div className="chart-container">
+      <div className='chart-container'>
         <div>
-          <button onClick={() => handleSelectChartType("line")} className={chartType === "line" ? "active" : ""}>
+          <button
+            onClick={() => handleSelectChartType('line')}
+            className={chartType === 'line' ? 'active' : ''}
+          >
             라인 차트
           </button>
-          <button onClick={() => handleSelectChartType("bar")} className={chartType === "bar" ? "active" : ""}>
+          <button
+            onClick={() => handleSelectChartType('bar')}
+            className={chartType === 'bar' ? 'active' : ''}
+          >
             막대 차트
           </button>
-          <button onClick={() => handleSelectChartType("area")} className={chartType === "area" ? "active" : ""}>
+          <button
+            onClick={() => handleSelectChartType('area')}
+            className={chartType === 'area' ? 'active' : ''}
+          >
             영역 차트
           </button>
         </div>

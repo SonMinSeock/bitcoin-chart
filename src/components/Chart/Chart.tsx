@@ -1,15 +1,21 @@
-import ReactApexChart from "react-apexcharts";
-import { CoinQuote } from "../../services/coinApi";
+import ReactApexChart from 'react-apexcharts';
+import { CoinQuote } from '../../services/coinApi';
 
 interface ChartProps {
-  chartType: "line" | "bar" | "area" | undefined;
+  chartType: 'line' | 'bar' | 'area' | undefined;
   closeChart: () => void;
   coinName: string;
   coinQuote: CoinQuote;
-  currency: "KRW" | "USD";
+  currency: 'KRW' | 'USD';
 }
 
-const Chart = ({ chartType, closeChart, coinName, coinQuote, currency }: ChartProps) => {
+const Chart = ({
+  chartType,
+  closeChart,
+  coinName,
+  coinQuote,
+  currency,
+}: ChartProps) => {
   const currentPrice = coinQuote.price;
 
   // 시간 흐름에 따른 더미 데이터 (실제로는 API percent_change_xx로 만들 수도 있음)
@@ -22,7 +28,7 @@ const Chart = ({ chartType, closeChart, coinName, coinQuote, currency }: ChartPr
     ];
   };
 
-  const categories = ["12시간 전", "6시간 전", "1시간 전", "지금"];
+  const categories = ['12시간 전', '6시간 전', '1시간 전', '지금'];
 
   return (
     <div>
@@ -31,29 +37,29 @@ const Chart = ({ chartType, closeChart, coinName, coinQuote, currency }: ChartPr
         type={chartType}
         series={[
           {
-            name: "Price",
+            name: 'Price',
             data: getPrice(),
           },
         ]}
         options={{
           chart: {
             height: 250, // 차트 높이를 250으로 설정 (이 부분 수정)
-            type: "line",
+            type: 'line',
             zoom: {
               enabled: true,
             },
           },
           stroke: {
-            curve: "smooth",
+            curve: 'smooth',
           },
           title: {
-            text: "비트코인 가격 변화",
-            align: "center",
+            text: '비트코인 가격 변화',
+            align: 'center',
           },
           xaxis: {
             categories,
             title: {
-              text: "시간",
+              text: '시간',
             },
           },
           yaxis: {
