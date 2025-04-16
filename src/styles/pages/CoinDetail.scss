@@ -33,3 +33,19 @@
     }
   }
 }
+
+// 홈 버튼 스타일
+.back-home {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #005f77;
+  }
+}

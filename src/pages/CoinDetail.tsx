@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useBitcoinPriceDetailQuery } from "../hooks/useBitcoinPriceQuery";
 import Chart from "../components/Chart";
 
@@ -19,6 +19,9 @@ const CoinDetail = () => {
 
   return (
     <div className="coin-detail-container">
+      <Link to="/" className="back-home">
+        ← 홈으로
+      </Link>
       <h2>
         {data.name} ({data.symbol}) 상세 정보
       </h2>
