@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+  .coin-detail-container {
+    padding: 15px;
+    h2 {
+      font-size: 1.8rem;
+    }
+    .currency-buttons button {
+      font-size: 1rem;
+      padding: 8px 14px;
+    }
+  }
+  .home-container {
+    padding: 15px;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    li {
+      font-size: 1rem;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useBitcoinPriceQuery } from "../hooks/useBitcoinPriceQuery";
+import CoinCard from "../components/CoinCard/CoinCard";
 
 const Home = () => {
   const { data, isLoading, isError, error } = useBitcoinPriceQuery("KRW");
@@ -11,15 +11,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <h2>코인 목록</h2>
-      <ul>
-        {data?.map((coin) => (
-          <li key={coin.id}>
-            <Link to={`/coin/${coin.id}`}>
-              {coin.name} ({coin.symbol})
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {data && <CoinCard data={data} />}
     </div>
   );
 };

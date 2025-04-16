@@ -1,0 +1,25 @@
+.coin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.coin-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #005f77;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
