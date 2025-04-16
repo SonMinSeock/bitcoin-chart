@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useBitcoinPriceDetailQuery } from "../hooks/useBitcoinPriceQuery";
-import Chart from "../components/Chart";
+import Chart from "../components/Chart/Chart";
 
 const CoinDetail = () => {
   const { id } = useParams<{ id: string }>();
