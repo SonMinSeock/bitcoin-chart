@@ -6,6 +6,7 @@ $text-color: #333; // 기본 텍스트 색상
 $button-hover-color: #0056b3; // 버튼 호버 색상
 
 @import "./base/reset";
+@import "./components/Spinner/LoadingSpinner.scss";
 @import "./components/CoinCard/CoinCard.scss";
 @import "./pages/Home.scss";
 @import "./pages/CoinDetail.scss";

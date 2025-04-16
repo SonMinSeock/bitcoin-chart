@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useBitcoinPriceDetailQuery } from "../hooks/useBitcoinPriceQuery";
 import Chart from "../components/Chart/Chart";
+import LoadingSpinner from "../components/Spinner/LoadingSpinner";
 
 const CoinDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [currency, setCurrency] = useState<"KRW" | "USD">("KRW");
   const [chartType, setChartType] = useState<"line" | "bar" | "area" | undefined>();
-  const { data, isLoading, isError, error } = useBitcoinPriceDetailQuery(currency, id ?? "");
+  const { data, isLoading, isError, error, isFetched } = useBitcoinPriceDetailQuery(currency, id ?? "");
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러 발생: {(error as Error).message}</p>;
-
   if (!data) return <p>해당 코인을 찾을 수 없습니다.</p>;
 
   // price에 안전하게 접근
@@ -30,6 +30,7 @@ const CoinDetail = () => {
       <Link to="/" className="back-home">
         ← 홈으로
       </Link>
+
       <h2>
         {data.name} ({data.symbol}) 상세 정보
       </h2>
