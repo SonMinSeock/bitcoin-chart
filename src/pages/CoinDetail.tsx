@@ -10,8 +10,10 @@ const CoinDetail = () => {
   const [chartType, setChartType] = useState<
     'line' | 'bar' | 'area' | undefined
   >();
-  const { data, isLoading, isError, error, isFetched } =
-    useBitcoinPriceDetailQuery(currency, id ?? '');
+  const { data, isLoading, isError, error } = useBitcoinPriceDetailQuery(
+    currency,
+    id ?? ''
+  );
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러 발생: {(error as Error).message}</p>;
